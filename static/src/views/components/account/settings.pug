@@ -1,0 +1,21 @@
+.settings-page(data-template='account/settings')
+  .container.page
+    .row
+      .col-md-6.offset-md-3.col-xs-12
+        h1.text-xs-center Your Settings
+        ul.error-messages(data-name='errors' data-list='{"list": "errors"}')
+          li {key} #[span(data-bind='val:commaList:t')]
+        form(data-act='form' data-prevent='true')
+          fieldset
+            fieldset.form-group
+              input.form-control(type="text" name='image' placeholder="URL of profile picture")
+            fieldset.form-group
+              input.form-control.form-control-lg(type="text" name='username' placeholder="Your Name")
+            fieldset.form-group
+              textarea.form-control.form-control-lg(rows="8" name='bio' placeholder="Short bio about you")
+            fieldset.form-group
+              input.form-control.form-control-lg(type="text" name='email' placeholder="Email")
+            fieldset.form-group
+              input.form-control.form-control-lg(type="password" name='password' placeholder="Password")
+            button.btn.btn-lg.btn-primary.pull-xs-right
+              | Update Settings

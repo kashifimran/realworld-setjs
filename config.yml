@@ -1,0 +1,14 @@
+name: realworld-setjs
+version: 0.0.1
+email: help@stateempire.com
+api_url: https://conduit.productionready.io/api/
+local:
+  environment: local
+  domain: localhost
+  site_port: 61002
+development:
+  environment: development
+  domain: set.stateempire.dev
+master:
+  environment: production
+  domain: set.stateempire.com

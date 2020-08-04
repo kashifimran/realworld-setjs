@@ -1,0 +1,15 @@
+.auth-page(data-template='account/login')
+  .container.page
+    .row
+      .col-md-6.offset-md-3.col-xs-12
+        h1.text-xs-center Login
+        p.text-xs-center
+          a(data-href="signup") Need an account?
+        ul.error-messages(data-name='errors' data-list='{"list": "errors"}')
+          li {key} #[span(data-bind='val:commaList:t')]
+        form(data-act='form' data-prevent='true')
+          fieldset.form-group
+            input.form-control.form-control-lg(type="text" name='email' placeholder="Email")
+          fieldset.form-group
+            input.form-control.form-control-lg(type="password" name='password' placeholder="Password")
+          button.btn.btn-lg.btn-primary.pull-xs-right Login
