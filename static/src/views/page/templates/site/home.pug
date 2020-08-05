@@ -9,23 +9,13 @@
         .feed-toggle
           ul.nav.nav-pills.outline-active
             li.nav-item
-              a.nav-link(data-href="my-feed" data-bind='@route.path:equal,my-feed|toggleClass,active') Your Feed
+              a.nav-link(data-href="my-feed" data-bind='tab:equal,my-feed|toggleClass,active') Your Feed
             li.nav-item
-              a.nav-link(data-href="/" data-bind='@route.path:not|toggleClass,active') Global Feed
-        .articles(data-list='{"list": "articles", "alt": "site/home/empty", "vars": {"v": "article"}}')
-          .article-preview
-            .article-meta
-              a(data-href="profile/@{article.author.username}")
-                img(data-src="{article.author.image}")
-              .info
-                a.author(data-href="profile/@{article.author.username}") {article.author.username}
-                span.date(data-bind='article.createdAt')
-              button.btn.btn-outline-primary.btn-sm.pull-xs-right
-                i.ion-heart {article.favoritesCount}
-            a.preview-link(data-href="")
-              h1 {article.title}
-              p {article.description}
-              span Read more...
+              a.nav-link(data-href="/" data-bind='tab:equal,home|toggleClass,active') Global Feed
+            li.nav-item(data-if='tag')
+              a.nav-link.active(data-href="?tag={tag}") \#{tag}
+        .articles(data-list='{"list": "articles", "t": "common/article-preview", "alt": "common/article-preview/empty", "vars": {"v": "article"}}')
+
         nav
           ul.pagination(data-list='{"list": "pages", "vars": {"v": "page"}}')
             li.page-item(class='{o:page.cls}'): a.page-link(data-href='{page.link}') {page.index}
@@ -35,7 +25,3 @@
           p Popular Tags
           .tag-list(data-list='{"list": "@tags", "vars": {"v": "tag"}}')
             a.tag-pill.tag-default(data-href="?tag={tag}") {tag}
-
-
-div(data-template='site/home/empty')
-  .article-preview No articles are here... yet.

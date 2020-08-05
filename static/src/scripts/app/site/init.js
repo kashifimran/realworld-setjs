@@ -10,7 +10,7 @@ import view from './pages/view.js';
 
 export default function() {
   addPage('(my-feed)?', home);
-  addPage('profile/[^/]+', profile);
-  addPage('editor', editor);
-  addPage('articles', view);
+  addPage('profile/[^/]+(/favorited)?', profile);
+  addPage('editor/[^/]+', editor);
+  addPage('articles/[^/]+', view);
 }

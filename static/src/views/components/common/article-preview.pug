@@ -1,0 +1,19 @@
+.article-preview(data-template='common/article-preview')
+  .article-meta
+    a(data-href="profile/@{article.author.username}")
+      img(data-src="{o:article.author.image}")
+    .info
+      a.author(data-href="profile/@{article.author.username}") {article.author.username}
+      span.date(data-bind='article.createdAt:moment')
+    button.btn.btn-sm.pull-xs-right(data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
+      i.ion-heart(data-act='click' data-func='toggleFavorite' data-bind='article.favoritesCount')
+  a.preview-link(data-href="articles/{article.slug}")
+    h1 {article.title}
+    p {article.description}
+    span Read more...
+  ul.tag-list(data-list='{"list": "article.tagList", "vars": {"v": "tag"}}')
+    li.tag-default.tag-pill.tag-outline: a(data-href="?tag={tag}") {tag}
+
+
+div(data-template='common/article-preview/empty')
+  .article-preview No articles are here... yet.

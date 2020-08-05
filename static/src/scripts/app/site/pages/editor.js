@@ -4,27 +4,35 @@ import {api} from 'core/api-helper.js';
 export default {
   templates: ['site/editor'],
   preload: function(opts) {
+    console.log(opts.route);
     if (opts.route.slug) {
       opts.slug = opts.route.slug;
       api.getArticle(opts);
     } else {
-      opts.success({});
+      opts.success({article: {}});
     }
   },
-  getComp: function(opts, article) {
+  getComp: function(opts, {article}) {
     article.tagList  = article.tagList || [];
-    return setjs.getComp('site/editor', null, {
+    var pageComp = setjs.getComp('site/editor', {article}, {
       addTag: function({e, $el}) {
         if (e.which == 13) {
           var val = $el.val().trim();
           e.preventDefault();
           e.stopPropagation();
-          if (val) {
-            article.tagList.push();
+          $el.val('');
+          if (val && article.tagList.indexOf(val) < 0) {
+            article.tagList.push(val);
+            pageComp.renderList('tagList');
           }
         }
       },
+      removeTag: function({data}) {
+        article.tagList.splice(data.key, 1);
+        pageComp.renderList('tagList');
+      },
       form: function({$el, error}) {
+        console.log({article: $el.formJson({tagList: article.tagList})});
         api.saveArticle({
           data: {article: $el.formJson({tagList: article.tagList})},
           error,
@@ -34,5 +42,6 @@ export default {
         });
       }
     });
+    return pageComp;
   }
 };

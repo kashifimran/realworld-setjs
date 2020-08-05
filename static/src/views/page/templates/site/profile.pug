@@ -5,47 +5,22 @@
         .col-xs-12.col-md-10.offset-md-1
           img.user-img(data-src="{o:profile.image}")
           h4 {profile.username}
-          p {profile.bio}
-          button.btn.btn-sm.btn-outline-secondary.action-btn
-            i.ion-plus-round(data-if='profile.username|equal,{@user.username}|not') Follow {profile.username}
-            a.ion-plus-round(data-if='profile.username|equal,{@user.username}' data-href='settings') Edit Profile Settings
+          p {o:profile.bio}
+          button.btn.btn-sm.btn-outline-secondary.action-btn(data-if='profile.username|equal,{@user.username}|not')
+            i.ion-plus-round(data-act='click' data-func='toggleFollow') #[span(data-bind='profile.following:either,Unfollow,Follow|t')] {profile.username}
+          a.btn.btn-sm.btn-outline-secondary.action-btn(data-if='profile.username|equal,{@user.username}' data-href='settings')
+            i.ion-gear-a Edit Profile Settings
   .container
     .row
       .col-xs-12.col-md-10.offset-md-1
         .articles-toggle
           ul.nav.nav-pills.outline-active
             li.nav-item
-              a.nav-link.active(data-href="") My Articles
+              a.nav-link(data-href="profile/@{profile.username}" data-bind='@route.id:not|toggleClass,active') My Articles
             li.nav-item
-              a.nav-link(href="") Favorited Articles
-        .article-preview
-          .article-meta
-            a(href="")
-              img(src="http://i.imgur.com/Qr71crq.jpg")
-            .info
-              a.author(href="") Eric Simons
-              span.date January 20th
-            button.btn.btn-outline-primary.btn-sm.pull-xs-right
-              i.ion-heart
-              |  29
-          a.preview-link(href="")
-            h1 How to build webapps that scale
-            p This is the description for the post.
-            span Read more...
-        .article-preview
-          .article-meta
-            a(href="")
-              img(src="http://i.imgur.com/N4VcUeJ.jpg")
-            .info
-              a.author(href="") Albert Pai
-              span.date January 20th
-            button.btn.btn-outline-primary.btn-sm.pull-xs-right
-              i.ion-heart
-              |  32
-          a.preview-link(href="")
-            h1 The song you won't ever stop singing. No matter how hard you try.
-            p This is the description for the post.
-            span Read more...
-            ul.tag-list
-              li.tag-default.tag-pill.tag-outline Music
-              li.tag-default.tag-pill.tag-outline Song
+              a.nav-link(data-href="profile/@{profile.username}/favorited" data-bind='@route.id:bool|toggleClass,active') Favorited Articles
+        .articles(data-list='{"list": "articles", "t": "common/article-preview", "alt": "common/article-preview/empty", "vars": {"v": "article"}}')
+
+        nav
+          ul.pagination(data-list='{"list": "pages", "vars": {"v": "page"}}')
+            li.page-item(class='{o:page.cls}'): a.page-link(data-href='{@route.path}{page.link}') {page.index}

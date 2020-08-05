@@ -1,6 +1,6 @@
 import setjs from '@stateempire/setjs';
 import {api} from 'core/api-helper.js';
-import {qsParams} from 'helpers/site-helpers.js';
+import {getQs, createPages} from 'helpers/site-helpers.js';
 import {articleLimit} from 'config/app-config.js';
 
 export default {
@@ -14,26 +14,9 @@ export default {
     api.getArticles(opts);
   },
   getComp: function(opts, pageData) {
-    pageData.pages = createPages(pageData);
+    pageData.pages = createPages(pageData.articlesCount);
+    pageData.tag = setjs.qs('tag');
+    pageData.tab = pageData.tag ? 'tag' : setjs.route().pageId || 'home';
     return setjs.getComp('site/home', pageData);
   }
 };
-
-function createPages({articlesCount}) {
-  var pages = [];
-  var currentPage = (setjs.qs('page') || 1);
-  var lastPage = Math.ceil(articlesCount / articleLimit);
-  for (var i = 1; i <= lastPage; i++) {
-    pages.push({index: i, link: '?' + getQs({page: i}), cls: currentPage == i ? 'active' : ''});
-  }
-  return pages;
-}
-
-function getQs(ext) {
-  var params = {
-    author: setjs.qs('author'),
-    tag: setjs.qs('tag'),
-    favorited: setjs.qs('favorited'),
-  };
-  return qsParams($.extend(params, ext));
-}
