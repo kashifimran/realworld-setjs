@@ -5,7 +5,7 @@
         h1.text-xs-center Your Settings
         ul.error-messages(data-name='errors' data-list='{"list": "errors"}')
           li {key} #[span(data-bind='val:commaList:t')]
-        form(data-act='form' data-prevent='true')
+        form(data-act='form')
           fieldset
             fieldset.form-group
               input.form-control(type="text" name='image' placeholder="URL of profile picture")

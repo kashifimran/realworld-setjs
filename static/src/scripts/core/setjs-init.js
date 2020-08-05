@@ -36,6 +36,39 @@ function compUpdate($selection) {
   });
 }
 
+function handleEvent(args, func) {
+  let {comp, $el, action, e} = args;
+  if (comp.busy) {
+    return 1;
+  }
+  if (e.originalEvent && e.originalEvent.changedTouches && e.originalEvent.changedTouches.length) {
+    args._e = e;
+    args.e = e.originalEvent.changedTouches[0];
+  }
+  if (action == 'form') {
+    let $button = $el.find('[type="submit"]');
+    comp.busy = true;
+    $button.prop('disabled', true);
+    $el.addClass('loading').removeClass('error success');
+    args.error = function(message) {
+      args.end('error', message);
+    };
+    args.success = function(messageObj) {
+      args.end('success', (messageObj && messageObj.message) || messageObj);
+    };
+    args.end = function(cls, message) {
+      comp.busy = false;
+      $el.removeClass('loading').addClass(cls);
+      $button.prop('disabled', false);
+      if (comp.$formMsg) {
+        comp.$formMsg.text(message || '');
+      }
+    };
+  }
+  func(args);
+  return e.type == 'submit' || $el.data('stop');
+}
+
 export default function() {
   setjs.init({
     router,
@@ -44,6 +77,7 @@ export default function() {
     fixPath,
     getLink,
     compUpdate,
+    handleEvent,
     lang: langHelper.lang,
   });
 }

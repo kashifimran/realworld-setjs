@@ -13,7 +13,7 @@ function showError(message, comp) {
 }
 
 function mcSubmitCreator(callback) {
-  return function ({comp, endLoading}) {
+  return function ({comp, end}) {
     comp.$mcForm.removeClass('success error');
     $.ajax({
       url: comp.$mcForm.attr('action'),
@@ -22,14 +22,14 @@ function mcSubmitCreator(callback) {
       contentType: 'application/json; charset=utf-8',
       data: comp.$mcForm.serialize(),
       error: function() {
-        endLoading();
+        end();
         showError('Mail server not responding, try again later or turn off Incognito mode.', comp);
         callback && callback(3);
       },
       success: function(data) {
         var result = data.result,
         message = data.msg;
-        endLoading();
+        end();
         if (result === 'success') {
           comp.$mcForm.addClass('success');
           comp.$formMsg.text(message);
