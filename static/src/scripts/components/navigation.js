@@ -1,9 +1,6 @@
 import setjs from '@stateempire/setjs';
 import eventManager, {eventTypes} from 'setbp/kernel/event-manager.js';
 
-/**
-* Initializes the footer
-*/
 export default function(route) {
   var comp = setjs.getComp('common/navigation');
   var $pageLinks = comp.$root.find('a');
@@ -16,6 +13,5 @@ export default function(route) {
     path = path || '/';
     $pageLinks.removeClass('active');
     $pageLinks.filter('[data-href="' + path + '"]').addClass('active');
-    console.log(path);
   }
 }

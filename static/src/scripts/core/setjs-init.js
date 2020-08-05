@@ -49,16 +49,18 @@ function handleEvent(args, func) {
     let $button = $el.find('[type="submit"]');
     comp.busy = true;
     $button.prop('disabled', true);
-    $el.addClass('loading').removeClass('error success');
-    args.error = function(message) {
-      args.end('error', message);
+    $el.addClass('busy').removeClass('error success');
+    args.error = function(errors) {
+      comp.data.errors = errors;
+      comp.renderList('errors');
+      args.end('error');
     };
-    args.success = function(messageObj) {
-      args.end('success', (messageObj && messageObj.message) || messageObj);
+    args.success = function(message) {
+      args.end('success', message);
     };
     args.end = function(cls, message) {
       comp.busy = false;
-      $el.removeClass('loading').addClass(cls);
+      $el.removeClass('busy').addClass(cls);
       $button.prop('disabled', false);
       if (comp.$formMsg) {
         comp.$formMsg.text(message || '');

@@ -11,11 +11,11 @@ html
     link(rel="stylesheet" href="//demo.productionready.io/main.css")
     link(rel="stylesheet", href="/styles/main.css?v=" + timestamp)
   body
+    .initial
+      .middle Loading...
     #nav-placeholder
     #main-content
-    #initial-transition.fadeout-transition.initial
-      .middle Loading...
-    #footer-placeholder.lightbox-close-btn
+    #footer-placeholder
     script(type="text/template" id="init-error")
       main(data-template="init-error", data-id="error")
         h1 Error

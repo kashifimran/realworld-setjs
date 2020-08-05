@@ -3,12 +3,12 @@
     .container
       .row
         .col-xs-12.col-md-10.offset-md-1
-          img.user-img(src="http://i.imgur.com/Qr71crq.jpg")
-          h4 Eric Simons
-          p
-            | Cofounder @GoThinkster, lived in Aol's HQ for a few months, kinda looks like Peeta from the Hunger Games
+          img.user-img(data-src="{o:profile.image}")
+          h4 {profile.username}
+          p {profile.bio}
           button.btn.btn-sm.btn-outline-secondary.action-btn
-            i.ion-plus-round Follow Eric Simons
+            i.ion-plus-round(data-if='profile.username|equal,{@user.username}|not') Follow {profile.username}
+            a.ion-plus-round(data-if='profile.username|equal,{@user.username}' data-href='settings') Edit Profile Settings
   .container
     .row
       .col-xs-12.col-md-10.offset-md-1

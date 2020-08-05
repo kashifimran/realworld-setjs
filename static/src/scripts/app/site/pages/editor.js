@@ -1,9 +1,8 @@
 import setjs from '@stateempire/setjs';
 import {api} from 'core/api-helper.js';
-import {formErrors} from 'helpers/site-helpers.js';
 
 export default {
-  templates: ['article/editor'],
+  templates: ['site/editor'],
   preload: function(opts) {
     if (opts.route.slug) {
       opts.slug = opts.route.slug;
@@ -14,7 +13,7 @@ export default {
   },
   getComp: function(opts, article) {
     article.tagList  = article.tagList || [];
-    return setjs.getComp('article/editor', null, {
+    return setjs.getComp('site/editor', null, {
       addTag: function({e, $el}) {
         if (e.which == 13) {
           var val = $el.val().trim();
@@ -25,10 +24,10 @@ export default {
           }
         }
       },
-      form: function({comp, $el, error}) {
+      form: function({$el, error}) {
         api.saveArticle({
-          data: {article: $el.formJson({tagList})},
-          error: formErrors(comp, error),
+          data: {article: $el.formJson({tagList: article.tagList})},
+          error,
           success: function() {
             setjs.setRoute();
           }

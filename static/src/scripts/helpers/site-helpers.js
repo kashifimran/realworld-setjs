@@ -1,7 +1,9 @@
-export function formErrors(comp, errorCb) {
-  return function(errors) {
-    comp.data.errors = errors;
-    comp.renderList('errors');
-    errorCb();
-  };
+export function qsParams(params) {
+  var str = '';
+  $.each(params, function(name, val) {
+    if (val) {
+      str += (str ? '&' : '') + name + '=' + encodeURIComponent(val);
+    }
+  });
+  return str;
 }
