@@ -8,13 +8,13 @@
         form(data-act='form')
           fieldset
             fieldset.form-group
-              input.form-control(type="text" name='image' placeholder="URL of profile picture")
+              input.form-control(type="text" name='image' placeholder="URL of profile picture" value='{o:user.image}')
             fieldset.form-group
-              input.form-control.form-control-lg(type="text" name='username' placeholder="Your Name")
+              input.form-control.form-control-lg(type="text" name='username' placeholder="Your Name" value='{o:user.username}')
             fieldset.form-group
-              textarea.form-control.form-control-lg(rows="8" name='bio' placeholder="Short bio about you")
+              textarea.form-control.form-control-lg(rows="8" name='bio' placeholder="Short bio about you") {o:user.bio}
             fieldset.form-group
-              input.form-control.form-control-lg(type="text" name='email' placeholder="Email")
+              input.form-control.form-control-lg(type="text" name='email' placeholder="Email" value='{o:user.email}')
             fieldset.form-group
               input.form-control.form-control-lg(type="password" name='password' placeholder="Password")
             button.btn.btn-lg.btn-primary.pull-xs-right
