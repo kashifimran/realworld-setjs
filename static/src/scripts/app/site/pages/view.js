@@ -63,6 +63,6 @@ export default {
     function updateMeta() {
       pageComp.headerMeta.update();
       pageComp.footerMeta.update();
-    };
+    }
   }
 };
