@@ -6,7 +6,6 @@ export default {
   templates: ['site/editor'],
   role: cascadeRoleFlag('public'),
   preload: function(opts) {
-    console.log(opts.route);
     if (opts.route.slug) {
       opts.slug = opts.route.slug;
       api.getArticle(opts);

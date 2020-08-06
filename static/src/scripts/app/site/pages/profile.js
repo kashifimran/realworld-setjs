@@ -14,7 +14,6 @@ export default {
     .go();
   },
   getComp: function(opts, {profileRes, articlesRes}) {
-    console.log(profileRes, articlesRes);
     var profile = profileRes.profile;
     var pageData = {
       profile,
