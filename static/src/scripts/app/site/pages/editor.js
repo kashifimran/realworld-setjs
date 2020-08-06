@@ -32,7 +32,6 @@ export default {
         pageComp.renderList('tagList');
       },
       form: function({$el, error}) {
-        console.log({article: $el.formJson({tagList: article.tagList})});
         api.saveArticle({
           data: {article: $el.formJson({tagList: article.tagList})},
           error,

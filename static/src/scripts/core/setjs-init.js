@@ -38,37 +38,40 @@ function compUpdate($selection) {
 
 function handleEvent(args, func) {
   let {comp, $el, action, e} = args;
-  if (comp.busy) {
-    return 1;
+  if (comp.busy || e.type == 'submit' || $el.data('stop')) {
+    // do this early, so errors later do not affect it
+    e.preventDefault();
+    e.stopPropagation();
   }
-  if (e.originalEvent && e.originalEvent.changedTouches && e.originalEvent.changedTouches.length) {
-    args._e = e;
-    args.e = e.originalEvent.changedTouches[0];
+  if (!comp.busy) {
+    if (e.originalEvent && e.originalEvent.changedTouches && e.originalEvent.changedTouches.length) {
+      args._e = e;
+      args.e = e.originalEvent.changedTouches[0];
+    }
+    if (action == 'form') {
+      let $button = $el.find('[type="submit"]');
+      comp.busy = true;
+      $button.prop('disabled', true);
+      $el.addClass('loading').removeClass('error success');
+      args.error = function(errors) {
+        comp.data.errors = errors;
+        comp.renderList('errors');
+        args.end('error');
+      };
+      args.success = function(message) {
+        args.end('success', message);
+      };
+      args.end = function(cls, message) {
+        comp.busy = false;
+        $el.removeClass('loading').addClass(cls);
+        $button.prop('disabled', false);
+        if (comp.$formMsg) {
+          comp.$formMsg.text(message || '');
+        }
+      };
+    }
+    func(args);
   }
-  if (action == 'form') {
-    let $button = $el.find('[type="submit"]');
-    comp.busy = true;
-    $button.prop('disabled', true);
-    $el.addClass('busy').removeClass('error success');
-    args.error = function(errors) {
-      comp.data.errors = errors;
-      comp.renderList('errors');
-      args.end('error');
-    };
-    args.success = function(message) {
-      args.end('success', message);
-    };
-    args.end = function(cls, message) {
-      comp.busy = false;
-      $el.removeClass('busy').addClass(cls);
-      $button.prop('disabled', false);
-      if (comp.$formMsg) {
-        comp.$formMsg.text(message || '');
-      }
-    };
-  }
-  func(args);
-  return e.type == 'submit' || $el.data('stop');
 }
 
 export default function() {

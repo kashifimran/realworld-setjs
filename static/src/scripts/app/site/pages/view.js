@@ -14,7 +14,6 @@ export default {
   getComp: function(opts, {articleRes, commentsRes}) {
     var {article} = articleRes;
     var {comments} = commentsRes;
-    console.log(article, comments);
     var pageComp = setjs.getComp('site/view', {article, comments}, {
       toggleFollow: function() {
         var user = article.author;
@@ -28,14 +27,16 @@ export default {
         });
         pageComp.updateMeta();
       },
-      saveComment: function({$el, error}) {
+      saveComment: function({$el, error, end}) {
         api.saveComment({
           slug: article.slug,
-          data: $el.formJSON(),
+          data: $el.formJson(),
           error,
           success: function({comment}) {
-            comments.push(comment);
+            comments.unshift(comment);
             pageComp.renderList('comments');
+            $el.find('textarea').val('');
+            end();
           },
         });
       },

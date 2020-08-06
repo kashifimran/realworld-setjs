@@ -1,23 +1,3 @@
-.article-meta(data-template='site/view/article-meta')
-  a(data-href="profile/@{article.author.username}")
-    img(data-src="{o:article.author.image}")
-  .info
-    a.author(data-href="profile/@{article.author.username}") {article.author.username}
-    span.date(data-bind='article.createdAt:moment')
-  span(data-if='article.author.username|equal,{@user.username}')
-    a.btn.btn-sm.btn-outline-secondary(data-href="editor/{article.slug}")
-      i.ion-edit: span Edit Article
-    span &nbsp; 
-    button.btn.btn-outline-danger.btn-sm(data-bind='article:deleteArticleBtn')
-      i.ion-trash-a: span Delete Article
-  span(data-if='article.author.username|equal,{@user.username}|not')
-    button.btn.btn-sm.btn-outline-secondary()
-      i.ion-plus-round(data-act='click' data-func='toggleFollow') #[span(data-bind='article.author.following:either,Unfollow,Follow|t')] {article.author.username}
-    span &nbsp;
-    button.btn.btn-sm.btn-outline-primary(data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
-      i.ion-heart(data-act='click' data-func='toggleFavorite') #[span(data-bind='article.favorited:either,Unfavorite,Favorite|t')] Post
-      span.counter(data-bind='article.favoritesCount|wrap, (,)|t')
-
 .article-page(data-template='site/view')
   .banner
     .container
@@ -33,7 +13,7 @@
 
     .row
       .col-xs-12.col-md-8.offset-md-2
-        form.card.comment-form(data-act='form' data-func='saveComment' data-stop='1')
+        form.card.comment-form(data-act='form' data-func='saveComment')
           ul.error-messages(data-name='errors' data-list='{"list": "errors"}')
             li {key} #[span(data-bind='val:commaList:t')]
           .card-block
@@ -53,3 +33,23 @@
               span.date-posted(data-bind='comment.createdAt:moment')
               span.mod-options(data-if='comment.author.username|equal,{@user.username}' data-act='click' data-func='deleteComment')
                 i.ion-trash-a
+
+.article-meta(data-template='site/view/article-meta')
+  a(data-href="profile/@{article.author.username}")
+    img(data-src="{o:article.author.image}")
+  .info
+    a.author(data-href="profile/@{article.author.username}") {article.author.username}
+    span.date(data-bind='article.createdAt:moment')
+  span(data-if='article.author.username|equal,{@user.username}')
+    a.btn.btn-sm.btn-outline-secondary(data-href="editor/{article.slug}")
+      i.ion-edit: span Edit Article
+    span &nbsp;
+    button.btn.btn-outline-danger.btn-sm(data-bind='article:deleteArticleBtn')
+      i.ion-trash-a: span Delete Article
+  span(data-if='article.author.username|equal,{@user.username}|not')
+    button.btn.btn-sm.btn-outline-secondary()
+      i.ion-plus-round(data-act='click' data-func='toggleFollow') #[span(data-bind='article.author.following:either,Unfollow,Follow|t')] {article.author.username}
+    span &nbsp;
+    button.btn.btn-sm.btn-outline-primary(data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
+      i.ion-heart(data-act='click' data-func='toggleFavorite') #[span(data-bind='article.favorited:either,Unfavorite,Favorite|t')] Post
+      span.counter(data-bind='article.favoritesCount|wrap, (,)|t')

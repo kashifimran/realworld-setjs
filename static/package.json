@@ -46,7 +46,7 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@stateempire/setjs": "^2.0.5",
+    "@stateempire/setjs": "^2.0.6",
     "animejs": "^3.2.0",
     "moment": "^2.27.0"
   },
