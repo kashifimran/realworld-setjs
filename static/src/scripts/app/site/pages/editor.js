@@ -36,8 +36,8 @@ export default {
         api.saveArticle({
           data: {article: $el.formJson({tagList: article.tagList})},
           error,
-          success: function() {
-            setjs.setRoute();
+          success: function(res) {
+            setjs.setRoute('articles/' + res.article.slug);
           }
         });
       }
