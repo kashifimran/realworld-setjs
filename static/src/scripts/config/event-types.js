@@ -16,4 +16,5 @@ export default {
   unload: 15,
   stripe: 16,
   cart: 17,
+  post_fav: 18,
 };

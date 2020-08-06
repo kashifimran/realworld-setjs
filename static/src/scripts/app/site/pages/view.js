@@ -1,4 +1,5 @@
 import setjs from '@stateempire/setjs';
+import eventManager, {eventTypes} from 'setbp/kernel/event-manager.js';
 import {api} from 'core/api-helper.js';
 import {batchCall} from 'setbp/utility/calls.js';
 
@@ -21,11 +22,11 @@ export default {
           user,
           error: function() {
             user.following = !user.following;
-            pageComp.updateMeta();
+            updateMeta();
             alert('Unable to change following. Please try again');
           },
         });
-        pageComp.updateMeta();
+        updateMeta();
       },
       saveComment: function({$el, error, end}) {
         api.saveComment({
@@ -55,10 +56,13 @@ export default {
         });
       },
     });
-    pageComp.updateMeta = function() {
+
+    eventManager.addListener(eventTypes.post_fav, {pageOnly: 1, id: 'view'}, updateMeta);
+    return pageComp;
+
+    function updateMeta() {
       pageComp.headerMeta.update();
       pageComp.footerMeta.update();
     };
-    return pageComp;
   }
 };

@@ -1,5 +1,6 @@
 import setjs from '@stateempire/setjs';
 import marked from 'marked';
+import eventManager, {eventTypes} from 'setbp/kernel/event-manager.js';
 import {api} from 'core/api-helper.js';
 
 setjs.addFuncs({
@@ -23,23 +24,24 @@ setjs.addFuncs({
   },
 });
 
-setjs.addAction('toggleFavorite', function({comp, data}) {
+setjs.addAction('toggleFavorite', function(opts) {
+  var data = opts.data;
   var article = data.article;
   api.toggleFavorite({
     article,
     error: function() {
       alert('Unable to toggle favorited. Please try again');
       article.favorited = !article.favorited;
-      updateComps();
+      raiseEvent();
     },
     success: function(res) {
       $.extend(data.article, res.article);
-      updateComps();
+      raiseEvent();
     },
   });
-  updateComps();
+  raiseEvent();
 
-  function updateComps() {
-    comp.rComp.updateMeta();
+  function raiseEvent() {
+    eventManager.raiseEvent(eventTypes.post_fav, opts);
   }
 });
