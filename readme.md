@@ -1,23 +1,21 @@
-# ![RealWorld Example App](logo.png)
+# ![RealWorld Example App](https://stateempire.com/images/common/pwa-192.png)
 
-> ### [YOUR_FRAMEWORK] codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
-
-
-### [Demo](https://github.com/gothinkster/realworld)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
+> ### [SetJS](https://github.com/stateempire) codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
 
-This codebase was created to demonstrate a fully fledged fullstack application built with **[YOUR_FRAMEWORK]** including CRUD operations, authentication, routing, pagination, and more.
+### [Demo](http://realworld-setjs.nonaf.com)&nbsp;&nbsp;&nbsp;&nbsp;[RealWorld](https://github.com/gothinkster/realworld)
 
-We've gone to great lengths to adhere to the **[YOUR_FRAMEWORK]** community styleguides & best practices.
+
+This codebase was created to demonstrate a fully fledged fullstack application built with **[SetJS Boilerplate]** including CRUD operations, authentication, routing, pagination, and more.
+
+We've gone to great lengths to adhere to the **[SetJS Boilerplate]** community styleguides & best practices.
 
 For more information on how to this works with other frontends/backends, head over to the [RealWorld](https://github.com/gothinkster/realworld) repo.
 
 
-# How it works
-
-> Describe the general architecture of your app here
-
 # Getting started
-
-> npm install, npm start, etc.
-
+```bash
+cd static
+npm install
+npm start
+```

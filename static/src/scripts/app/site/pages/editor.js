@@ -1,8 +1,10 @@
 import setjs from '@stateempire/setjs';
 import {api} from 'core/api-helper.js';
+import {cascadeRoleFlag} from 'setbp/kernel/roles.js';
 
 export default {
   templates: ['site/editor'],
+  role: cascadeRoleFlag('public'),
   preload: function(opts) {
     console.log(opts.route);
     if (opts.route.slug) {

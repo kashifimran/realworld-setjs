@@ -66,8 +66,7 @@ function login(opts) {
   }));
 }
 
-function logout(opts) {
-  ajaxCall($.extend({}, opts, {relativeUrl: 'account/logout'}));
+function logout() {
   clearAuth();
 }
 

@@ -10,7 +10,7 @@ export default {
           data: {user: $el.formJson()},
           error,
           success: function() {
-            setjs.setRoute();
+            setjs.setRoute(setjs.qs('url'));
           }
         });
       }
