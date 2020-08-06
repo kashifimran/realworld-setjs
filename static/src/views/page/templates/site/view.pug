@@ -6,7 +6,7 @@
 
   .container.page
     .row.article-content
-      .col-md-12 {o:article.body}
+      .col-md-12(data-bind='article.body:marked')
 
     hr
     .article-actions(data-slot='{"name": "footerMeta", "t": "site/view/article-meta"}')
@@ -25,7 +25,7 @@
         .comments(data-name='comments' data-list='{"list": "comments", "vars":{"v": "comment"}}')
           .card
             .card-block
-              p.card-text {comment.body}
+              p.card-text {o:comment.body}
             .card-footer
               a.comment-author(data-href="profile/{comment.author.username}")
                 img.comment-author-img(data-src="{comment.author.image}")

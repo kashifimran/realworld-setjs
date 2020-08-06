@@ -1,7 +1,11 @@
 import setjs from '@stateempire/setjs';
+import marked from 'marked';
 import {api} from 'core/api-helper.js';
 
 setjs.addFuncs({
+  marked: function(content, {$el}) {
+    $el.html(marked(content));
+  },
   deleteArticleBtn: function(article, {$el}) {
     $el.off('.del').on('click.del', function() {
       if (window.confirm('Do you really want to delete this article?')) {
