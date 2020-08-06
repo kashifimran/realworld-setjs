@@ -54,8 +54,8 @@ export function batchCall({success, error, progress}) {
   function go() {
     calls.forEach(function(item) {
       item.func($.extend({}, item.opts, {
-        error: function(...args) {
-          typeof(error == 'function') && error(item.opts, ...args);
+        error: function(errObj) {
+          typeof error == 'function' && error(errObj);
           error = 1;
         },
         success: function(res) {

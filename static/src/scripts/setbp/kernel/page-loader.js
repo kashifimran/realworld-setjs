@@ -18,7 +18,7 @@ function handleAuthError(type) {
 }
 
 function showError(data, compName='common/error') {
-  loader.loadContent(setjs.getComp(compName, data).$root, viewUpdate);
+  loader.loadContent(setjs.getComp(compName, typeof data == 'string' ? {msg: data} : data).$root, viewUpdate);
 }
 
 function authError() {
@@ -29,8 +29,8 @@ function connectionError() {
   showError({errName: 'connectionError'});
 }
 
-function initError() {
-  showError(null, 'init-error');
+function initError(result) {
+  showError(result, 'init-error');
 }
 
 function notFound() {

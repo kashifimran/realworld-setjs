@@ -66,8 +66,7 @@ $.fn.lightbox = function (opts = {}) {
     $('body').addClass(openCls).removeClass(openingCls);
     opts.created && opts.created(lightbox);
   }, delay);
-
-  return lightbox;
+  return this.data('lightbox', lightbox);
 
   function addCloseBtn() {
     var $btn = $(`<button class="${closeCls} lightbox-close-btn"></button>`).appendTo($btnParent).add($lightbox.find('.popup-close'));

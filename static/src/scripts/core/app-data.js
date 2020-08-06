@@ -12,7 +12,7 @@ eventManager.addListener(eventTypes.lang, {id: 'data', priority: 1}, function(la
   defData['@lang'] = appData.lang = langData;
 });
 
-export function initAppData({success, error}) {
+export default function({success, error}) {
   api.getTags({
     error,
     success: function({tags}) {

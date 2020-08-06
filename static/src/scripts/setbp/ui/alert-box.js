@@ -20,7 +20,7 @@ export default function(opts) {
       }
     },
   });
-  let lightbox = alertComp.$root.lightbox(exOpts);
+  let lightbox = alertComp.$root.lightbox(exOpts).data('lightbox');
   var controller = {
     error: function(error) {
       exOpts.errorMsg = error.message || error;

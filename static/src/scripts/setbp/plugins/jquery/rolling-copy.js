@@ -16,9 +16,9 @@ $.fn.rollingCopy = function() {
     }, delay);
   }, (this.data('interval') || 1) * 1000);
 
-  return {
+  return this.data('rolling', {
     unload: function() {
       clearTimeout(handle);
     }
-  };
+  });
 };
