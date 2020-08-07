@@ -19,7 +19,7 @@
           .card-block
             textarea.form-control(placeholder="Write a comment..." rows="3" name='body')
           .card-footer
-            img.comment-author-img(data-src="{@user.image}")
+            img.comment-author-img(data-bind="@user.image:str,`https://static.productionready.io/images/smiley-cyrus.jpg`|attr,src")
             button.btn.btn-sm.btn-primary(type='submit') Post Comment
 
         .comments(data-name='comments' data-list='{"list": "comments", "vars":{"v": "comment"}}')
@@ -36,7 +36,7 @@
 
 .article-meta(data-template='site/view/article-meta')
   a(data-href="profile/@{article.author.username}")
-    img(data-src="{o:article.author.image}")
+    img(data-bind="article.author.image:str,`https://static.productionready.io/images/smiley-cyrus.jpg`|attr,src")
   .info
     a.author(data-href="profile/@{article.author.username}") {article.author.username}
     span.date(data-bind='article.createdAt:moment')
