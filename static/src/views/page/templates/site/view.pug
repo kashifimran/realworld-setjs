@@ -13,7 +13,7 @@
 
     .row
       .col-xs-12.col-md-8.offset-md-2
-        form.card.comment-form(data-act='form' data-func='saveComment')
+        form.card.comment-form(data-if='@user' data-act='form' data-func='saveComment')
           ul.error-messages(data-name='errors' data-list='{"list": "errors"}')
             li {key} #[span(data-bind='val:commaList:t')]
           .card-block
@@ -22,6 +22,8 @@
             img.comment-author-img(data-bind="@user.image:str,`https://static.productionready.io/images/smiley-cyrus.jpg`|attr,src")
             button.btn.btn-sm.btn-primary(type='submit') Post Comment
 
+        p(data-if='@user|not') #[a(data-href="login") Sign in] or #[a(data-href="signup") sign up] to add comments on this article.
+
         .comments(data-name='comments' data-list='{"list": "comments", "vars":{"v": "comment"}}')
           .card
             .card-block
@@ -29,7 +31,7 @@
             .card-footer
               a.comment-author(data-href="profile/{comment.author.username}")
                 img.comment-author-img(data-src="{comment.author.image}")
-              a.comment-author(href="profile/{comment.author.username}") {comment.author.username}
+              a.comment-author(data-href="profile/{comment.author.username}") {comment.author.username}
               span.date-posted(data-bind='comment.createdAt:moment')
               span.mod-options(data-if='comment.author.username|equal,{@user.username}' data-act='click' data-func='deleteComment')
                 i.ion-trash-a
@@ -46,7 +48,7 @@
     span &nbsp;
     button.btn.btn-outline-danger.btn-sm(data-bind='article:deleteArticleBtn')
       i.ion-trash-a: span Delete Article
-  span(data-if='article.author.username|equal,{@user.username}|not')
+  span(data-if='article.author|canFollow')
     button.btn.btn-sm.btn-outline-secondary()
       i.ion-plus-round(data-act='click' data-func='toggleFollow') #[span(data-bind='article.author.following:either,Unfollow,Follow|t')] {article.author.username}
     span &nbsp;

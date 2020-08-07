@@ -5,7 +5,7 @@
     .info
       a.author(data-href="profile/@{article.author.username}") {article.author.username}
       span.date(data-bind='article.createdAt:moment')
-    button.btn.btn-sm.pull-xs-right(data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
+    button.btn.btn-sm.pull-xs-right(data-if='@user' data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
       i.ion-heart(data-act='click' data-func='toggleFavorite' data-bind='article.favoritesCount')
   a.preview-link(data-href="articles/{article.slug}")
     h1 {article.title}

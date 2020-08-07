@@ -7,6 +7,10 @@ setjs.addFuncs({
   marked: function(content, {$el}) {
     $el.html(marked(content));
   },
+  canFollow: function(author) {
+    var user = api.getUser();
+    return user && user.username != author.username;
+  },
   deleteArticleBtn: function(article, {$el}) {
     $el.off('.del').on('click.del', function() {
       if (window.confirm('Do you really want to delete this article?')) {
