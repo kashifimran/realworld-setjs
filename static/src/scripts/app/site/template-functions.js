@@ -39,13 +39,14 @@ setjs.addAction('toggleFavorite', function(opts) {
       raiseEvent();
     },
     success: function(res) {
-      $.extend(data.article, res.article);
+      $.extend(article, res.article);
       raiseEvent();
     },
   });
   raiseEvent();
 
   function raiseEvent() {
+    opts.comp.update();
     eventManager.raiseEvent(eventTypes.post_fav, opts);
   }
 });

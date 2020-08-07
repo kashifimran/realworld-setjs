@@ -49,9 +49,9 @@
     button.btn.btn-outline-danger.btn-sm(data-bind='article:deleteArticleBtn')
       i.ion-trash-a: span Delete Article
   span(data-if='article.author|canFollow')
-    button.btn.btn-sm.btn-outline-secondary()
-      i.ion-plus-round(data-act='click' data-func='toggleFollow') #[span(data-bind='article.author.following:either,Unfollow,Follow|t')] {article.author.username}
+    button.btn.btn-sm.btn-outline-secondary(data-act='click' data-func='toggleFollow')
+      i.ion-plus-round #[span(data-bind='article.author.following:either,Unfollow,Follow|t')] {article.author.username}
     span &nbsp;
-    button.btn.btn-sm.btn-outline-primary(data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
-      i.ion-heart(data-act='click' data-func='toggleFavorite') #[span(data-bind='article.favorited:either,Unfavorite,Favorite|t')] Post
+    button.btn.btn-sm.btn-outline-primary(data-act='click' data-func='toggleFavorite' data-bind='article.favorited:toggleClass,btn-primary:not|toggleClass,btn-outline-primary')
+      i.ion-heart #[span(data-bind='article.favorited:either,Unfavorite,Favorite|t')] Post
       span.counter(data-bind='article.favoritesCount|wrap, (,)|t')

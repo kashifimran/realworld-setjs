@@ -16,7 +16,7 @@
             fieldset.form-group
               input.form-control(type="text" placeholder="Enter tags" data-act='keypress' data-func='addTag')
               .tag-list(data-name='tagList' data-list='{"list": "article.tagList"}')
-                span(class="tag-default tag-pill")
-                  i(class="ion-close-round" data-act='click' data-func='removeTag')
+                span(class="tag-default tag-pill" data-act='click' data-func='removeTag')
+                  i(class="ion-close-round")
                   span {val}
             button.btn.btn-lg.pull-xs-right.btn-primary(type="submit") Publish Article
