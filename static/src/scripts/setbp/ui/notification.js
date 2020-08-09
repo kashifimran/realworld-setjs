@@ -18,3 +18,10 @@ export function errorNotification(callback) {
     callback && callback(msgObj);
   };
 }
+
+export function successNotification(callback) {
+  return function (msgObj) {
+    notification(msgObj, 'success');
+    callback && callback(msgObj);
+  };
+}

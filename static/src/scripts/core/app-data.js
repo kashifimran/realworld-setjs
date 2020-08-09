@@ -1,22 +1,20 @@
 import eventManager, {eventTypes} from 'setbp/kernel/event-manager.js';
 import {api} from 'core/api-helper.js';
 
-export let appData = {};
 export let defData = {};
 
-eventManager.addListener(eventTypes.user, {id: 'data', priority: 1}, function(user) {
-  defData['@user'] = appData.user = user;
-});
-
-eventManager.addListener(eventTypes.lang, {id: 'data', priority: 1}, function(langData) {
-  defData['@lang'] = appData.lang = langData;
+['init', 'route', 'user', 'lang'].forEach(function(name) {
+  eventManager.addListener(eventTypes[name], {id: 'data', priority: 1}, function(data) {
+    name = name == 'init' ? 'route' : name;
+    defData['@' + name] = data;
+  });
 });
 
 export default function({success, error}) {
   api.getTags({
     error,
     success: function({tags}) {
-      defData['@tags'] = appData.tags = tags;
+      defData['@tags'] = tags;
       success();
     }
   });

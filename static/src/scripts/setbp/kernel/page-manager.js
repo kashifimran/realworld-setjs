@@ -38,8 +38,8 @@ export function addPage(path, page) {
   if (pages[path]) {
     throw 'Path already exists: ' + path;
   }
-  page.preload = page.preload || dummyPageFunc;
-  page.once = page.once || dummyPageFunc;
+  page.preload = 'preload' in page ? page.preload : dummyPageFunc;
+  page.once = 'once' in page ? page.once : dummyPageFunc;
   page.path = path;
   pages[path] = page;
 }
