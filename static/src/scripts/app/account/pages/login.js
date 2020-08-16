@@ -1,5 +1,6 @@
 import setjs from '@stateempire/setjs';
 import {api} from 'core/api-helper.js';
+import {getQs} from 'setbp/utility/browser.js';
 
 export default {
   templates: ['account'],
@@ -10,7 +11,7 @@ export default {
           data: {user: $el.formJson()},
           error,
           success: function() {
-            setjs.setRoute(setjs.qs('url'));
+            setjs.setRoute(getQs('url'));
           }
         });
       }

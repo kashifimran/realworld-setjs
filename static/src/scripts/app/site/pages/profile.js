@@ -1,13 +1,14 @@
 import setjs from '@stateempire/setjs';
 import {api} from 'core/api-helper.js';
 import {batchCall} from 'setbp/utility/calls.js';
-import {qsParams, createPages} from 'helpers/site-helpers.js';
+import {makeQs} from 'setbp/utility/browser.js';
+import {createPages} from 'helpers/site-helpers.js';
 
 export default {
   templates: ['site/profile'],
   preload: function(opts) {
     var username = opts.route.slug.replace(/^@/, '');
-    var query = qsParams(opts.route.id == 'favorited' ? {favorited: username} : {author: username});
+    var query = makeQs(opts.route.id == 'favorited' ? {favorited: username} : {author: username});
     batchCall(opts)
     .add(api.getProfile, {username}, 'profileRes')
     .add(api.getArticles, {query}, 'articlesRes')

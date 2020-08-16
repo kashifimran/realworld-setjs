@@ -21,7 +21,7 @@ function buildCss(path) {
       ]))
       .pipe(gulpif(env.current.mode != env.local.mode, purgecss({
         content: [paths.dest.base + '/index.html', paths.dest.base + '/templates/**/*.html'],
-        whitelistPatterns: [/^js-*/],
+        whitelistPatterns: [],
         whitelist: ['hide', 'disabled', 'blockquote']})))
       .pipe(gulpif(env.current.mode != env.local.mode, cleanCSS()))
       .pipe(gulp.dest(paths.dest.styles))
