@@ -3,3 +3,4 @@ export {viewUpdate} from 'core/events.js';
 export var closeCls = 'set-close';
 export var wheelDelay = 1500;
 export var articleLimit = 10;
+export var jqList = ['text', 'html', 'toggleClass', 'val', 'css', 'attr', 'prop', 'data', 'selectize', 'accordion', 'instagram'];

@@ -1,9 +1,10 @@
 import setjs from '@stateempire/setjs';
+import {addAction, addFuncs} from 'core/acts-funcs.js';
 import marked from 'marked';
 import eventManager, {eventTypes} from 'setbp/kernel/event-manager.js';
 import {api} from 'core/api-helper.js';
 
-setjs.addFuncs({
+addFuncs({
   marked: function(content, {$el}) {
     $el.html(marked(content));
   },
@@ -28,7 +29,7 @@ setjs.addFuncs({
   },
 });
 
-setjs.addAction('toggleFavorite', function(opts) {
+addAction('toggleFavorite', function(opts) {
   var data = opts.data;
   var article = data.article;
   api.toggleFavorite({

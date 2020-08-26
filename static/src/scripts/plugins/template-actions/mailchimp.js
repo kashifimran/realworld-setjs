@@ -1,6 +1,6 @@
-import setjs from '@stateempire/setjs';
+import {addAction} from 'core/acts-funcs.js';
 
-setjs.addAction('mcSubmit', mcSubmitCreator());
+addAction('mcSubmit', mcSubmitCreator());
 
 function showError(message, comp) {
   comp.$formMsg.text(message);

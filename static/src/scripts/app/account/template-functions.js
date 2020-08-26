@@ -1,4 +1,5 @@
 import setjs from '@stateempire/setjs';
+import {addAction, addFuncs} from 'core/acts-funcs.js';
 import {roleFlag, testRole} from 'setbp/kernel/roles.js';
 import {api} from 'core/api-helper.js';
 
@@ -9,7 +10,7 @@ function createRoleToggle(show) {
   };
 }
 
-setjs.addFuncs({
+addFuncs({
   testRole: function(val, opts, ...roles) {
     return testRole(roleFlag(roles));
   },
@@ -17,7 +18,7 @@ setjs.addFuncs({
   hideFrom: createRoleToggle(),
 });
 
-setjs.addAction('logout', function() {
+addAction('logout', function() {
   api.logout();
   setjs.setRoute('');
 });

@@ -21,11 +21,10 @@ function listIndex(str) {
   }
 }
 
-function parsePath(_path, _val) {
+function parsePath(path) {
   var parts = [];
   var mark = 0;
   var skip;
-  var {path, val} = processType(_path, _val);
   for (var i = 0; i < path.length; i++) {
     if (skip) {
       if (path[i] == ']') {
@@ -36,7 +35,7 @@ function parsePath(_path, _val) {
     } else if (path[i] == '[') {
       skip = i;
       if (!i) {
-        throw 'Bad object config ' + _path;
+        throw 'Bad object config ' + path;
       }
     } else if (path[i] == '.') {
       addObj();
@@ -44,7 +43,7 @@ function parsePath(_path, _val) {
     }
   }
   addObj();
-  return {parts, val};
+  return parts;
 
   function addObj() {
     if (mark < i) {
@@ -57,8 +56,9 @@ function partIndex(part, arr) {
   return part.list ? part.index != null ? part.index : arr.length : null;
 }
 
-export function storeValue(target, path, _val) {
-  var {parts, val} = parsePath(path, _val);
+export function storeValue(target, _path, _val) {
+  var {path, val} = processType(_path, _val);
+  var parts = parsePath(path);
   var index;
   parts.forEach(function(part, i) {
     let end = i == parts.length - 1;
@@ -90,20 +90,25 @@ export function storeValue(target, path, _val) {
   function storeInArray(part, end) {
     let tmp = target[index];
     if (part.list) {
-      tmp = Array.isArray(tmp) ? tmp : [];
+      if (part.key) {
+        if (typeof tmp != 'object') {
+          tmp = target[index] = {};
+        }
+        tmp = tmp[part.key] = Array.isArray(tmp[part.key]) ? tmp[part.key] : [];
+      } else {
+        tmp = target[index] = Array.isArray(tmp) ? tmp : [];
+      }
       if (end) {
         tmp[partIndex(part, tmp)] = val;
       }
-      target = target[index] = tmp;
     } else {
-      tmp = typeof tmp == 'object' ? tmp : {};
+      target[index] = tmp = typeof tmp == 'object' ? tmp : {};
       if (end) {
         tmp[part.key] = val;
-        target[index] = tmp;
       } else {
-        target[index] = tmp;
-        target = tmp[part.key] = {};
+        tmp = tmp[part.key] = {};
       }
     }
+    target = tmp;
   }
 }
